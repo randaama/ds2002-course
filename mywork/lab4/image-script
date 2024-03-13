@@ -1,0 +1,14 @@
+#!/bin/bash
+
+
+read -p "Please enter your image URL: " URL
+
+curl $URL > image.png
+aws s3 cp image.png s3://ds2002-gba4fj/
+
+aws s3 presign --expires-in 604800 s3://ds2002-gba4fj/image.png
+
+https://ds2002-gba4fj.s3.us-east-1.amazonaws.com/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-
+Credential=AKIAXYKJRHE4BDASPBAY%2F20240313%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-
+Date=20240313T211058Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-
+Signature=35670f726374779323d2b6d10b9f81aa81f5deec5b2235c13e3f773f2ec87f96
