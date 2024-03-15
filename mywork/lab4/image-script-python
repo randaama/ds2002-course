@@ -1,0 +1,29 @@
+#!/Users/randap/anaconda3/bin/python
+
+
+import boto3
+
+s3 = boto3.client('s3')
+
+bucket_name = 'ds2002-gba4fj'
+object_name = 'fantage.png'
+expires_in = 604800
+
+
+def create_presigned_url(bucket_name, object_name, expires_in=604800):
+	
+	response = s3.generate_presigned_url(
+	'get_object',
+	Params={'Bucket': bucket_name, 'Key': object_name},
+	ExpiresIn=expires_in)
+	
+	return response
+
+
+
+print(create_presigned_url(bucket_name, object_name, expires_in))
+
+
+
+https://ds2002-gba4fj.s3.amazonaws.com/fantage.png?AWSAccessKeyId=AKIAXYKJRHE4BDASPBA
+Y&Signature=tjFK2yUXFNMKElfQBD%2FTrsvMoXo%3D&Expires=1711143224
